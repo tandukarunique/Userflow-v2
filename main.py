@@ -22,14 +22,17 @@ def main():
             #inbox.inbox_actions()
             #inbox.type_message()
             #inbox.send_message()
-            inbox.inbox_reply()
-            inbox.resolve_unresolve()
+            #inbox.inbox_reply()
+            #inbox.resolve_unresolve()
         #Note--------------------------
             #inbox.note()
         #Quick response----------------
             #inbox.quick_response()
             #inbox.create_quick_reply()
             #inbox.private_response()
+            #inbox.set_reminder()
+        #Right sidebar-----------------
+            #inbox.right_side()
         
             
             

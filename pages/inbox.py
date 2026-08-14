@@ -31,6 +31,10 @@ class InboxPage(BasePage):
     CONTINUE = "button[data-slot='button'][data-variant='default'][data-size='icon-xs'][data-icon-only='true']"
     AUDIO_TICK = "button:has(svg path[d='M20 7L9 18L4 13'])"
     MULTIPLE_OPTIONS = "button:has(svg path[d*='M17 13.75V3.75M17 13.75C18.7956 13.75 20.25 15.2044 20.25 17C20.25 18.7956 18.7956 20.25 17'])"
+    USER_INFO = 'button:has(svg path[d*="8.17157"])'
+    TAG_SVG ="button:has(svg path[d*='M12 6.75V12M12 12V17.25M12 12H6'])"
+    
+    
     
     
     
@@ -211,6 +215,113 @@ class InboxPage(BasePage):
         self.page.locator("button[type='submit']:has-text('Resolve')").click()
         #Take conversation........
         self.page.locator("button:has-text('Takeover Conversation')").click()
+        
+    def set_reminder(self):
+        self.page.locator("button:has-text('Set Reminder')").click()
+        self.page.locator("button:has-text('Tomorrow')").click()
+        self.page.locator("button:has-text('Set Date & time')").click()
+        self.page.get_by_placeholder("Add note").fill("This is reminder note...")
+        self.send_message()
+        
+    def right_side(self):
+        #User information
+        self.click(self.USER_INFO)
+        self.page.locator("#name").fill("uzumymw")
+        self.page.locator("#email").fill("demo@email.com")
+        self.page.locator("#phone").fill("7759802222")
+        self.page.locator("button:has-text('Save')").click()
+        
+        #Lead
+        self.page.locator("button:has-text('Lead Type')").first.click()
+        self.wait('long')
+        self.page.locator("button:has-text('Potential'), button:has-text('Non-potential')").click()
+        self.wait('long')
+        self.page.keyboard.press("ArrowDown")
+        self.page.keyboard.press("ArrowDown")
+        self.page.keyboard.press("Enter")
+        
+        #Tags......
+        try:
+            self.page.locator("button:has-text('Add Tags')").click()
+            self.click(self.TAG_SVG)
+            tag_name = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
+            self.page.get_by_placeholder("search or create tag").fill(tag_name)
+            self.page.keyboard.press("Enter")
+            print("Tag created successfully...")
+            self.page.get_by_placeholder("search or create tag").fill(tag_name)
+            self.page.keyboard.press("Enter")
+            print("Tag used successflly....")
+            self.page.keyboard.press("Escape")
+        except Exception as e:
+            print(f"Failed to create tag... Error: {e}")
+            
+        #Company details..........
+        try:
+            self.page.locator("button:has-text('Company Details')").click()
+            self.page.locator("#company_name").fill("Demo company name")
+            print("Company name filled...")
+            
+            #Company size
+            self.page.locator("#company_size").click()
+            self.page.keyboard.press("ArrowDown")
+            self.page.keyboard.press("ArrowDown")
+            self.page.keyboard.press("Enter")
+            print("Company size selected...")
+            
+            #Industry
+            self.page.locator("#company_industry").click()           
+            self.page.keyboard.press("ArrowDown")          
+            self.page.keyboard.press("ArrowDown")          
+            self.page.keyboard.press("Enter")          
+            print("Company industry selected......")     
+            
+            #Company website url 
+            url = self.page.locator("#company_website_url")       
+            url.click()           
+            url.press("Control+A")        
+            url.fill("https://thisdemowebsite.com")           
+            print("URL inserted....")            
+            
+            #Other details.........
+            other_details = self.page.locator("#other_details")          
+            other_details.press("Control+A")
+            other_details.fill("This is other company detail..")
+            
+        
+        except Exception as e:
+            print("Error in company details........")
+        
+       # #Notes
+        #self.page.locator("button:has-text('Notes')").click()
+                
+       # #AI summary
+       # self.page.locator("button:has-text('AI Summary')").click()
+       # 
+       # #Visit Information
+       # self.page.locator("button:has-text('Visit Information')").click()
+       # 
+       # #AI Insights
+       # self.page.locator("button:has-text('AI Insights')").click()
+        
+        #Reminder
+        self.page.locator("button:has-text('Reminder')").first.click()
+        self.page.locator("div.flex.flex-col.gap-2.p-2.max-h-80 > div:first-child").click()
+        self.page.locaator("button:has-text('Close')").click()
+        
+        
+        
+        
+                
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
         
         
 
