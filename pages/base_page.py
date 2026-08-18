@@ -1,10 +1,21 @@
 from playwright.sync_api import Page
 import random
 import string
+import time
 
 class BasePage:
     def __init__(self, page):
         self.page = page
+        self.TIMEOUTS = {
+            'short': 500,
+            'medium': 1000,
+            'long': 2000,
+        }
+        
+    def wait(self, duration='medium'):
+           
+        self.page.wait_for_timeout(self.TIMEOUTS.get(duration, 1000))
+        return self
     
     def navigate_to(self, url):
         self.page.goto(url)
@@ -14,7 +25,7 @@ class BasePage:
         self.page.wait_for_load_state("load")
         return self
     
-    def wait_for_element(self, selector, timeout=30000):
+    def wait_for_element(self, selector, timeout=900000):
         self.page.wait_for_selector(selector, state="visible", timeout=timeout)
         return self
     

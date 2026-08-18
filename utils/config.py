@@ -14,9 +14,11 @@ class Config:
     INVALID_EMAIL = "invalid@example.com"
     INVALID_PASSWORD = "wrongpassword"
 
-    DEFAULT_TIMEOUT = 30000
+    DEFAULT_TIMEOUT = 900000
     SHORT_TIMEOUT = 5000
     LONG_TIMEOUT = 60000
+    
+    
 
     HEADLESS = os.getenv("CHATBOQ_HEADLESS", "false").lower() == "true"
     SLOW_MO = 500

@@ -131,26 +131,27 @@ class LeadAndCRMPage(BasePage):
         self.page.wait_for_timeout(2000)
         
     def sort_by(self):
-        self.page.locator("button:has-text('Sort')").click()
+        self.page.locator("button:has-text('Sort By')").click()
         
         self.page.get_by_role("option", name="Newest First").click()
-        self.wait('long')
+        self.wait('short')
         self.page.locator("button:has-text('Newest First')").click()
         
         self.page.get_by_role("option", name="Oldest First").click()
-        self.wait('long')
+        self.wait('short')
         self.page.locator("button:has-text('Oldest First')").click()
         
         self.page.get_by_role("option", name="Lead Name (A–Z)").click()
-        self.wait('long')
+        self.wait('short')
         self.page.locator("button:has-text('Lead Name (A–Z)')").click()
         
         self.page.get_by_role("option", name="Lead Name (Z–A)").click()
-        self.wait('long')
+        self.wait('short')
         self.page.locator("button:has-text('Lead Name (Z–A)')").click()
         
-        self.page.get_by_role("option", name="Referred By").click()
-        self.wait('long')   
+        self.page.get_by_role("option", name="Referred").click()
+        self.wait('short')   
+        
         
     def filter_by(self):
         self.page.locator("button:has-text('All Statuses')").click()
@@ -188,63 +189,68 @@ class LeadAndCRMPage(BasePage):
         
         self.page.get_by_role("option", name="Lost").click()
         self.wait('long')
+        
+        self.page.locator("button:has-text('Lost')").click()
+        self.page.get_by_role("option", name="All Statuses").click()
+        
+        
     #Source filter
     def filter_by_source(self):
         self.page.locator("button:has-text('All Sources')").click()
 
-        self.wait('long')
+        self.wait('short')
         self.page.get_by_role("option", name="Website Chat").click()
-        self.wait('long')
+        self.wait('short')
         self.page.locator("button:has-text('Website Chat')").click()
         self.wait('short')
 
         self.page.get_by_role("option", name="Live Visitor").click()
-        self.wait('long')
+        self.wait('short')
         self.page.locator("button:has-text('Live Visitor')").click()
         self.wait('short')
 
         self.page.get_by_role("option", name="Contact Form").click()
-        self.wait('long')
+        self.wait('short')
         self.page.locator("button:has-text('Contact Form')").click()
         self.wait('short')
 
         self.page.get_by_role("option", name="Demo Request").click()
-        self.wait('long')
+        self.wait('short')
         self.page.locator("button:has-text('Demo Request')").click()
         self.wait('short')
 
         self.page.get_by_role("option", name="Email").click()
-        self.wait('long')
+        self.wait('short')
         self.page.locator("button:has-text('Email')").click()
         self.wait('short')
 
         self.page.get_by_role("option", name="Whatsapp").click()
-        self.wait('long')
+        self.wait('short')
         self.page.locator("button:has-text('Whatsapp')").click()
         self.wait('short')
 
         self.page.get_by_role("option", name="Instagram").click()
-        self.wait('long')
+        self.wait('short')
         self.page.locator("button:has-text('Instagram')").click()
         self.wait('short')
 
         self.page.get_by_role("option", name="Facebook").click()
-        self.wait('long')
+        self.wait('short')
         self.page.locator("button:has-text('Facebook')").click()
         self.wait('short')
 
         self.page.get_by_role("option", name="LinkedIn").click()
-        self.wait('long')
+        self.wait('short')
         self.page.locator("button:has-text('LinkedIn')").click()
         self.wait('short')
 
         self.page.get_by_role("option", name="Google Ads").click()
-        self.wait('long')
+        self.wait('short')
         self.page.locator("button:has-text('Google Ads')").click()
         self.wait('short')
 
         self.page.get_by_role("option", name="Organic Search").click()
-        self.wait('long')
+        self.wait('short')
         self.page.locator("button:has-text('Organic Search')").click()
         self.wait('short')
 
@@ -254,12 +260,14 @@ class LeadAndCRMPage(BasePage):
         self.wait('short')
 
         self.page.get_by_role("option", name="Event / Webinar").click()
-        self.wait('long')
+        self.wait('short')
         self.page.locator("button:has-text('Event / Webinar')").click()
         self.wait('short')
 
         self.page.get_by_role("option", name="Manual entry").click()
-        self.wait('long')
+        self.wait('short')
+        
+        
 
     def all_assignees(self):
         self.page.locator("button:has-text('All Assignees')").click()
@@ -273,7 +281,7 @@ class LeadAndCRMPage(BasePage):
         self.page.locator("input[placeholder='Search Lead...']").click()
         self.wait('short')
         
-        self.page.keyboard.type("Te")
+        self.page.keyboard.type("Unique")
         self.wait('short')
         self.click(self.LEAD_SVG)
         #Edit lead
@@ -306,10 +314,7 @@ class LeadAndCRMPage(BasePage):
         
         self.page.locator("button:has-text('Update Status')").click()
         self.wait('long')
-        self.wait('long')
-        self.wait('long')
-        self.wait('long')
-        self.wait('long')
+        
         
         
 

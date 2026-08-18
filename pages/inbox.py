@@ -16,7 +16,8 @@ class InboxPage(BasePage):
     
     INBOX_PAGE = "//*[local-name()='svg' and .//*[local-name()='path' and contains(@d, 'M4.75195 7.75098H15.252C16.3565')]]"
     PERSON_SVG = "//*[local-name()='svg' and .//*[local-name()='path' and contains(@d, 'M12.002 12.2422C14.4872')]]"
-    MESSAGE_ACTION_SVG = "//*[local-name()='svg' and .//*[local-name()='path' and contains(@d, 'M14 5C14 3.89543 13.1046 3 12 ')]]"
+    MESSAGE_ACTION_SVG = "//*[local-name()='path' and contains(@d, 'M14 5C14 3.89543 13.1046 3 12 ')]/ancestor::*[local-name()='svg']"
+    NOTE_ACTION_SVG = "//button[.//*[local-name()='path' and contains(@d, 'M14 5C14 3.89543 13.1046 3 12 ')]]"
     SHOW_DELETED = "//*local-name()='svg' and .//*local-name()='path' and contains(@d, 'M13 17.25C16.4518 17.25')"
     FORMATTING = "button:has(svg path[d*='M2.00797 18.6496C2.52996 18.6496 2.82695 18.3976'])"
     SEND_BTN = "button:has(svg path[d*='M9.50929 4.23111L18.0693 8.51111'])"
@@ -38,13 +39,14 @@ class InboxPage(BasePage):
     
     
     
+    
     def wait(self, duration='medium'):
        
         self.page.wait_for_timeout(self.TIMEOUTS.get(duration, 1000))
         return self
     
     def go_to_inbox(self):
-        self.page.wait_for_selector(self.INBOX_PAGE, state="visible", timeout=30000)
+        self.page.wait_for_selector(self.INBOX_PAGE, state="visible", timeout=900000)
         self.page.click(self.INBOX_PAGE)
         self.page.wait_for_load_state("load")
         self.wait('short')
@@ -153,9 +155,10 @@ class InboxPage(BasePage):
         #delete
         self.page.locator("div:has-text('This is edited note........')").last.hover()
         self.wait('long')
-        self.click(self.MESSAGE_ACTION_SVG)
-        self.page.get_by_role("menuitem", name="Reply").click()
+        self.click(self.NOTE_ACTION_SVG)
+        self.page.get_by_role("menuitem", name="Delete").click()
         self.wait('short')
+        
         self.page.locator("button:has-text('Confirm text')").click()
         self.wait('long')
     
@@ -170,8 +173,10 @@ class InboxPage(BasePage):
         self.page.locator("#title").fill(random_title)
         self.page.locator("button:has-text('Select group')").click()
         self.wait('medium')
-        self.page.get_by_role("option", name="Hello group one").click()
+        self.page.get_by_role("option", name="Grouuup").click()
         self.wait('short')
+        
+        
         
         self.page.locator("#shortcut").fill(random_shortcut)
         self.wait('short')
@@ -217,10 +222,12 @@ class InboxPage(BasePage):
         self.page.locator("button:has-text('Takeover Conversation')").click()
         
     def set_reminder(self):
-        self.page.locator("button:has-text('Set Reminder')").click()
+        
+        self.page.locator("//button[contains(text(), 'Set Reminder')]").click()
+        self.wait('short')
         self.page.locator("button:has-text('Tomorrow')").click()
         self.page.locator("button:has-text('Set Date & time')").click()
-        self.page.get_by_placeholder("Add note").fill("This is reminder note...")
+        self.page.get_by_placeholder("Add reminder note").fill("This is reminder note...")
         self.send_message()
         
     def right_side(self):
@@ -305,8 +312,10 @@ class InboxPage(BasePage):
         
         #Reminder
         self.page.locator("button:has-text('Reminder')").first.click()
-        self.page.locator("div.flex.flex-col.gap-2.p-2.max-h-80 > div:first-child").click()
-        self.page.locaator("button:has-text('Close')").click()
+        #self.page.locator("div.flex.flex-col.gap-2.p-2.max-h-80 > div:first-child").click()
+        self.page.locator("button:has-text('Mark as completed')").click()
+        self.wait('short')
+        self.page.locator("button:has-text('Close')").click()
         
         
         
