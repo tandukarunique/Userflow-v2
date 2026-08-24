@@ -65,8 +65,7 @@ class TicketPage(LeadAndCRMPage):
         
     def create_ticket(self):
         self.page.locator("button:has-text('Create Ticket')").first.click()
-        
-        
+             
     def fill_ticket_form(self):
         self.page.locator('#scopeUuid').click()
         self.page.press('#scopeUuid', 'Enter')
@@ -132,8 +131,7 @@ class TicketPage(LeadAndCRMPage):
             "Customer needs urgent response",
             "Scheduled for follow-up review"
         ]
-        self.page.locator('#note').fill(random.choice(notes))
-        
+        self.page.locator('#note').fill(random.choice(notes))     
     
     def attachments(self):
         import os

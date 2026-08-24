@@ -137,7 +137,7 @@ class InboxPage(BasePage):
         self.send_message()
    
     def note(self):
-        self.page.locator("button:has-text('Reply')").click()
+        self.page.locator("button:has-text('Reply')").first.click()
         self.wait('short')
         self.page.get_by_text("Notes(Internal Only)").click()
         self.wait('short')
@@ -206,7 +206,8 @@ class InboxPage(BasePage):
                 self.page.locator("div:has-text('This is for reply')").last.hover()
                 self.wait('long')
                 self.click(self.MESSAGE_ACTION_SVG)
-                self.page.get_by_role("menuitem", name="Reply").click()
+                self.page.get_by_role("menuitem", name="Reply").nth(0).click()
+                
                 self.wait('short')
                 self.type_message("Replied text......")
                 self.send_message()

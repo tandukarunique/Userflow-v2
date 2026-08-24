@@ -1,0 +1,22 @@
+2026-08-24 15:46:38,548 INFO o.a.j.u.JMeterUtils: Setting Locale to en_EN
+2026-08-24 15:46:38,567 INFO o.a.j.JMeter: Loading user properties from: /opt/apache-jmeter-5.6.3/bin/user.properties
+2026-08-24 15:46:38,567 INFO o.a.j.JMeter: Loading system properties from: /opt/apache-jmeter-5.6.3/bin/system.properties
+2026-08-24 15:46:38,576 INFO o.a.j.JMeter: Copyright (c) 1998-2024 The Apache Software Foundation
+2026-08-24 15:46:38,577 INFO o.a.j.JMeter: Version 5.6.3
+2026-08-24 15:46:38,578 INFO o.a.j.JMeter: java.version=21.0.11
+2026-08-24 15:46:38,578 INFO o.a.j.JMeter: java.vm.name=OpenJDK 64-Bit Server VM
+2026-08-24 15:46:38,578 INFO o.a.j.JMeter: os.name=Linux
+2026-08-24 15:46:38,578 INFO o.a.j.JMeter: os.arch=amd64
+2026-08-24 15:46:38,578 INFO o.a.j.JMeter: os.version=7.0.0-29-generic
+2026-08-24 15:46:38,578 INFO o.a.j.JMeter: file.encoding=UTF-8
+2026-08-24 15:46:38,579 INFO o.a.j.JMeter: java.awt.headless=null
+2026-08-24 15:46:38,579 INFO o.a.j.JMeter: Max memory     =1073741824
+2026-08-24 15:46:38,579 INFO o.a.j.JMeter: Available Processors =8
+2026-08-24 15:46:38,595 INFO o.a.j.JMeter: Default Locale=English (EN)
+2026-08-24 15:46:38,595 INFO o.a.j.JMeter: JMeter  Locale=English (EN)
+2026-08-24 15:46:38,595 INFO o.a.j.JMeter: JMeterHome=/opt/apache-jmeter-5.6.3
+2026-08-24 15:46:38,596 INFO o.a.j.JMeter: user.dir  =/home/unique/Desktop/v2_automation
+2026-08-24 15:46:38,596 INFO o.a.j.JMeter: PWD       =/home/unique/Desktop/v2_automation
+2026-08-24 15:46:38,597 INFO o.a.j.JMeter: IP: 127.0.1.1 Name: tandukar FullName: tandukar
+2026-08-24 15:46:38,617 INFO o.a.j.JMeter: Loaded icon properties from org/apache/jmeter/images/icon.properties
+2026-08-24 15:46:38,998 INFO o.a.j.JMeterGuiLauncher: Setting LAF to: com.github.weisj.darklaf.DarkLaf:com.github.weisj.darklaf.theme.DarculaTheme

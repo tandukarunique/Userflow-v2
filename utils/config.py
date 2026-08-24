@@ -9,7 +9,7 @@ class Config:
     # Used as the default session UUID and local saved-session filename.
     AUTH_SESSION_ID = "a8998f2e-046b-44f2-98b0-c49cb55d3402"
 
-    VALID_EMAIL = "hello@sharklasers.com"
+    VALID_EMAIL = "hello6@sharklasers.com"
     VALID_PASSWORD = "Thacha098!"
     INVALID_EMAIL = "invalid@example.com"
     INVALID_PASSWORD = "wrongpassword"
