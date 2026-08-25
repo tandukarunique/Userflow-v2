@@ -11,15 +11,18 @@ jobs:
   test-inbox:
     runs-on: ubuntu-22.04
     timeout-minutes: 15
-    
+    # Skip entirely for PRs from forks — secrets are never exposed to them,
+    # so the job would just fail on the missing-secret check below anyway.
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.11'
-    
+
     - name: Cache pip packages
       uses: actions/cache@v3
       with:
@@ -27,13 +30,26 @@ jobs:
         key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
         restore-keys: |
           ${{ runner.os }}-pip-
-    
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         playwright install chromium --with-deps
-    
+
+    - name: Debug secret presence
+      env:
+        CHATBOQ_SESSION_ID: ${{ secrets.SESSION_ID || secrets.SECRET_KEY }}
+      run: |
+        if [ -z "$CHATBOQ_SESSION_ID" ]; then
+          echo "::error::CHATBOQ_SESSION_ID is empty. Check that SESSION_ID (or SECRET_KEY) exists under"
+          echo "::error::Settings > Secrets and variables > Actions > Repository secrets (not Environment secrets,"
+          echo "::error::unless this job declares that environment), and that this run has access to it"
+          echo "::error::(fork PRs never do)."
+        else
+          echo "CHATBOQ_SESSION_ID is present (length: ${#CHATBOQ_SESSION_ID})"
+        fi
+
     - name: Run inbox tests
       env:
         CHATBOQ_SESSION_ID: ${{ secrets.SESSION_ID || secrets.SECRET_KEY }}
@@ -42,7 +58,7 @@ jobs:
       run: |
         test -n "$CHATBOQ_SESSION_ID" || (echo "Missing GitHub secret: set SESSION_ID or SECRET_KEY" && exit 1)
         pytest tests/test_inbox.py -v -s --browser=chromium --maxfail=3
-    
+
     - name: Upload test results
       if: always()
       uses: actions/upload-artifact@v4
