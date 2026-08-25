@@ -36,8 +36,11 @@ jobs:
     
     - name: Run inbox tests
       env:
-        SESSION_ID: ${{ secrets.SESSION_ID }}
+        CHATBOQ_SESSION_ID: ${{ secrets.SESSION_ID || secrets.SECRET_KEY }}
+        CHATBOQ_HEADLESS: "true"
+        CHATBOQ_SLOW_MO: "0"
       run: |
+        test -n "$CHATBOQ_SESSION_ID" || (echo "Missing GitHub secret: set SESSION_ID or SECRET_KEY" && exit 1)
         pytest tests/test_inbox.py -v -s --browser=chromium --maxfail=3
     
     - name: Upload test results

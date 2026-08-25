@@ -21,4 +21,4 @@ class Config:
     
 
     HEADLESS = os.getenv("CHATBOQ_HEADLESS", "false").lower() == "true"
-    SLOW_MO = 500
+    SLOW_MO = int(os.getenv("CHATBOQ_SLOW_MO", "500"))
