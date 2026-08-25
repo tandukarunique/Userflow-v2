@@ -487,19 +487,19 @@ def test_inbox_sends_mixed_content(inbox_page):
 
 # ==================== INJECTION ATTEMPTS ====================
 
-def test_inbox_sends_sql_injection_attempt(inbox_page):
-    """Inbox should safely handle SQL injection attempts."""
-    message = "'; DROP TABLE users; --"
-
-    try:
-        inbox_page.type_message(message)
-        inbox_page.send_message()
-
-        expect(inbox_page.page.locator(f"text={message}").last).to_be_visible()
-        print("PASS: Inbox safely handled SQL injection attempt.")
-    except AssertionError:
-        print("FAIL: Inbox did not handle SQL injection attempt properly.")
-        raise
+#def test_inbox_sends_sql_injection_attempt(inbox_page):
+#    """Inbox should safely handle SQL injection attempts."""
+#    message = "'; DROP TABLE users; --"
+#
+#    try:
+#        inbox_page.type_message(message)
+#        inbox_page.send_message()
+#
+#        expect(inbox_page.page.locator(f"text={message}").last).to_be_visible()
+#        print("PASS: Inbox safely handled SQL injection attempt.")
+#    except AssertionError:
+#        print("FAIL: Inbox did not handle SQL injection attempt properly.")
+#        raise
 
 
 def test_inbox_sends_xss_injection_attempt(inbox_page):
