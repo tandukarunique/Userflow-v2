@@ -20,20 +20,20 @@ def main():
             inbox = InboxPage(page)
             inbox.go_to_inbox()
             inbox.select_convo()
-            #inbox.inbox_actions()
-            #inbox.type_message()
-            #inbox.send_message()
+            inbox.inbox_actions()
+            inbox.type_message()
+            inbox.send_message()
             inbox.inbox_reply()
-            #inbox.resolve_unresolve()
+            inbox.resolve_unresolve()
             
         #Note--------------------------
-            inbox.note()
+            #inbox.note()
             
         #Quick response----------------
-            inbox.quick_response()
-            inbox.create_quick_reply()
-            inbox.private_response()
-            inbox.set_reminder()
+            #inbox.quick_response()
+            #inbox.create_quick_reply()
+            #inbox.private_response()
+            #inbox.set_reminder()
             
         #Right sidebar-----------------
             inbox.right_side()
@@ -41,14 +41,14 @@ def main():
             lead_page = LeadAndCRMPage(page)  
             lead_page.go_to_lead()
     
-            for i in range(3):    
+            for i in range(2):    
                 lead_page.create_lead()
                 
             lead_page.sort_by()
             lead_page.filter_by()
             lead_page.filter_by_source()
             lead_page.all_assignees()
-            lead_page.search_actions()
+            #lead_page.search_actions()
             
         #    #Tickets...............
             ticket_page = TicketPage(page)

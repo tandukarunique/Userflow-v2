@@ -22,16 +22,21 @@ def logged_in_context_fixture(session_id: str):
             browser.close()
 
 
-@pytest.fixture(name="inbox_page")
-def inbox_page_fixture(logged_in_context, session_id: str):
+@pytest.fixture(scope="session", name="authenticated_page")
+def authenticated_page_fixture(logged_in_context, session_id: str):
     page: Page = authenticate(logged_in_context, session_id, allow_manual_login=False)
     try:
-        inbox = InboxPage(page)
-        inbox.go_to_inbox()
-        inbox.select_convo()
-        yield inbox
+        yield page
     finally:
         page.close()
+
+
+@pytest.fixture(name="inbox_page")
+def inbox_page_fixture(authenticated_page: Page):
+    inbox = InboxPage(authenticated_page)
+    inbox.go_to_inbox()
+    inbox.select_convo()
+    return inbox
 
 
 # ==================== EMPTY/WHITESPACE EDGE CASES ====================
@@ -484,22 +489,7 @@ def test_inbox_sends_mixed_content(inbox_page):
         raise
 
 
-
 # ==================== INJECTION ATTEMPTS ====================
-
-#def test_inbox_sends_sql_injection_attempt(inbox_page):
-#    """Inbox should safely handle SQL injection attempts."""
-#    message = "'; DROP TABLE users; --"
-#
-#    try:
-#        inbox_page.type_message(message)
-#        inbox_page.send_message()
-#
-#        expect(inbox_page.page.locator(f"text={message}").last).to_be_visible()
-#        print("PASS: Inbox safely handled SQL injection attempt.")
-#    except AssertionError:
-#        print("FAIL: Inbox did not handle SQL injection attempt properly.")
-#        raise
 
 
 def test_inbox_sends_xss_injection_attempt(inbox_page):
